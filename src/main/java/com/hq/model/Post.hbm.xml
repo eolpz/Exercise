@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hq.model">
+	<class name="Post" table="crm_post">
+		<!-- oid属性映射 -->
+		<id name="postId">
+			<!-- 主键生成策略 -->
+			<generator class="identity" />
+		</id>
+		<!-- 其他属性映射 -->
+		<property name="postName" type="string" length="100" />
+		<!-- 关联部门 -->
+		<many-to-one name="department" column="depId" lazy="false" fetch="join"/>
+		
+	</class>
+
+</hibernate-mapping>       

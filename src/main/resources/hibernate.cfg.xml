@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!-- hibernate核心配置文件 -->
+<hibernate-configuration>
+	<!-- 设置JDBC 连接属性 -->
+	<session-factory>
+
+		<!-- SQL dialect 数据库方言 -->
+		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+
+		<!-- 输出sql语句 -->
+		<property name="show_sql">true</property>
+		<!-- 格式化sql -->
+		<property name="format_sql">true</property>
+
+		<!-- 检测数据模型 在SessionFactory创建时，自动检查数据库结构 -->
+		<property name="hbm2ddl.auto">update</property>
+
+		
+		<!-- <mapping resource="com/hq/model/Emp.hbm.xml"/>
+		<mapping resource="com/hq/model/Dept.hbm.xml"/> -->
+		<mapping resource="com/hq/model/User.hbm.xml"/>
+		<mapping resource="com/hq/model/Department.hbm.xml"/>
+		<mapping resource="com/hq/model/Post.hbm.xml"/>
+		<mapping resource="com/hq/model/Staff.hbm.xml"/>
+		<mapping resource="com/hq/model/Clazz.hbm.xml"/>
+		<mapping resource="com/hq/model/Course.hbm.xml"/>
+		<mapping resource="com/hq/model/Refer.hbm.xml"/>
+		<mapping resource="com/hq/model/Follow.hbm.xml"/>
+		<mapping resource="com/hq/model/Student.hbm.xml"/>
+		<mapping resource="com/hq/model/Station.hbm.xml"/>
+		<mapping resource="com/hq/model/RunOff.hbm.xml"/>
+		<mapping resource="com/hq/model/Graduate.hbm.xml"/>
+	</session-factory>
+
+</hibernate-configuration>

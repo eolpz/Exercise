@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hq.model">
+	<class name="RunOff" table="crm_runoff">
+		<!-- oid属性映射 -->
+		<id name="runOffid">
+			<!-- 主键生成策略 -->
+			<generator class="identity"/>
+		</id>
+		<!-- 其他属性映射 -->
+		<property name="creatdate" type="date" length="100" />
+		<property name="isRefund" length="100" />
+		<property name="refundAmount" type="double" length="100" />
+		<property name="remark" length="20" />
+		
+	<many-to-one name="student" column="student_id" lazy="false" fetch="join"/>
+	<many-to-one name="staff" column="staffid" lazy="false" fetch="join"/>
+	
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!-- 修改后 重新加载xml -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 打开开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	
+	
+	<!-- <package name="user" extends="struts-default"
+		strict-method-invocation="false">
+		<interceptors>
+			声明自定义拦截器
+			<interceptor name="check" class="com.hq.interceptor.CheckUser" />
+			自定义拦截器栈
+			<interceptor-stack name="myStack">
+				添加拦截器
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="check" />
+			</interceptor-stack>
+		</interceptors>
+
+
+		<action name="user_*" class="userAction" method="{1}">
+			<result>/frame.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+	</package> -->
+	
+	
+	
+<package name="day2" extends="struts-default" strict-method-invocation="false">
+	<interceptors>
+			<interceptor name="check" class="com.interceptor.CheckUser"/>
+			<interceptor-stack name="myStack">
+			<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="check" />
+			</interceptor-stack>
+	</interceptors>
+	
+		<action name="user_*" class="userAction" method="{1}">
+			<result>/frame.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+	
+		<action name="main" class="mainAction" method="main"></action>
+		
+		<action name="dep_*" class="departmentAction" method="{1}">
+			<result name="list">/html/department/listDepartment.jsp</result>
+			<result name="edit">/html/department/editDepartment.jsp</result>
+			<result name="add">/html/department/addDepartment.jsp</result>
+			<result name="success" type="redirectAction">dep_list</result>
+		</action>
+		<action name="stf_*" class="staffAction" method="{1}">
+			<result name="list">/html/staff/listStaff.jsp</result>
+			<result name="edit">/html/staff/editStaff.jsp</result>
+			<result name="add">/html/staff/addStaff.jsp</result>
+			<result name="success" type="redirectAction">stf_list</result>
+		</action>
+		<action name="pos_*" class="postAction" method="{1}">
+			<result name="list">/html/post/listPost.jsp</result>
+			<result name="edit">/html/post/editPost.jsp</result>
+			<result name="add">/html/post/addPost.jsp</result>
+			<result name="success" type="redirectAction">pos_list</result>
+		</action>
+		<action name="cla_*" class="clazzAction" method="{1}">
+			<result name="list">/html/classesm/listClass.jsp</result>
+			<result name="edit">/html/classesm/editClass.jsp</result>
+			<result name="add">/html/classesm/addClass.jsp</result>
+			<result name="view">/html/classesm/viewClass.jsp</result>
+			<result name="success" type="redirectAction">cla_list</result>
+		</action>
+		<action name="cour_*" class="courseAction" method="{1}">
+			<result name="list">/html/course/listCourseType.jsp</result>
+			<result name="edit">/html/course/editCourseType.jsp</result>
+			<result name="add">/html/course/addCourseType.jsp</result>
+			<result name="success" type="redirectAction">cour_list</result>
+		</action>
+		<action name="ref_*" class="referAction" method="{1}">
+			<result name="list">/html/refer/listRefer.jsp</result>
+			<result name="edit">/html/refer/editRefer.jsp</result>
+			<result name="add">/html/refer/addRefer.jsp</result>
+			<result name="view">/html/refer/queryRefer.jsp</result>
+			<result name="success" type="redirectAction">ref_list</result>
+		</action>
+		<action name="sta_*" class="stationAction" method="{1}">
+			<result name="list">/html/role/listRolePri.jsp</result>
+			<result name="edit">/html/role/editRole.jsp</result>
+			<result name="viewR">/html/role/viewRolepri.jsp</result>
+			<result name="success" type="redirectAction">sta_list</result>
+		</action>
+		<action name="fol_*" class="followAction" method="{1}">
+			<result name="list">/html/follow/listRefer.jsp</result>
+			<result name="edit">/html/follow/editRefer.jsp</result>
+			<result name="add">/html/follow/addRefer.jsp</result>
+			<result name="success" type="redirectAction">ref_list</result>
+		</action>
+		<action name="stu_*" class="studentAction" method="{1}">
+			<result name="list">/html/student/listStudent.jsp</result>
+			<result name="edit">/html/student/editStudent.jsp</result>
+			<result name="add">/html/student/addStudent.jsp</result>
+			<result name="view">/html/role/listRole.jsp</result>
+			<result name="success" type="redirectAction">stu_list</result>
+		</action>
+		<action name="gra_*" class="graduateAction" method="{1}">
+			<result name="list">/html/dept/listDept.jsp</result>
+			<result name="edit">/html/dept/editDept.jsp</result>
+			<result name="add">/html/follow/addRefer.jsp</result>
+			<result name="success" type="redirectAction">gra_list</result>
+		</action>
+		<action name="run_*" class="runoffAction" method="{1}">
+			<result name="list">/html/privilege/listPrivilege.jsp</result>
+			<result name="edit">/html/privilege/editPrivilege.jsp</result>
+			<result name="add">/html/privilege/addPrivilege.jsp</result>
+			<result name="success" type="redirectAction">run_list</result>
+		</action>
+		
+		<action name="user_*" class="userAction" method="{1}">
+			<result>/frame.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+</package>
+
+
+</struts>   

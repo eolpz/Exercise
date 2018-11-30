@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hq.model">
+<class name="Graduate" table="crm_gradute">
+		<!-- oid属性映射 -->
+		<id name="graduateid">
+			<!-- 主键生成策略 -->
+			<generator class="identity" />
+		</id>
+		<!-- 其他属性映射 -->
+		<property name="companyName" type="string" length="100" />
+		<property name="salary" type="double" length="100" />
+		<property name="post" type="string" length="100" />
+		<property name="entryTime" type="date" length="100" />
+		<property name="remark" type="string" length="100" />
+		
+		<!-- 关联部门 -->
+		<many-to-one name="clazz" column="clazzids" lazy="false" fetch="join"/>
+		<many-to-one name="student" column="studentids" lazy="false" fetch="join"/>
+		
+	</class>
+	</hibernate-mapping>

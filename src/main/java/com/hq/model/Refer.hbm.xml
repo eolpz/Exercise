@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hq.model">
+<class name="Refer" table="crm_refer">
+		<!-- oid属性映射 -->
+		<id name="referid">
+			<!-- 主键生成策略 -->
+			<generator class="identity" />
+		</id>
+		<!-- 其他属性映射 -->
+		<property name="refername" type="string" length="100" />
+		<property name="telephone" type="string" length="100" />
+		<property name="qq" type="string" length="100" />
+		<property name="creatDate" type="date" length="100" />
+		<property name="intentionLevel" type="string" length="100" />
+		<property name="Source" type="string" length="100" />
+		<property name="status" type="string" length="100" />
+		<property name="Remark" type="string" length="100" />
+		
+		<!-- 关联部门 -->
+		<many-to-one name="course" column="course_id" lazy="false" fetch="join"/>
+		<many-to-one name="clazz" column="clazz_id" lazy="false" fetch="join"/>
+		<many-to-one name="staff" column="staff_id" lazy="false" fetch="join"/>
+		
+	</class>
+	</hibernate-mapping>

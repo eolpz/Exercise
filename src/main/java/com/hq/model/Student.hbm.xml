@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hq.model">
+	<class name="Student" table="crm_stu">
+		<!-- oid属性映射 -->
+		<id name="studentid">
+			<!-- 主键生成策略 -->
+			<generator class="identity"/>
+		</id>
+		<!-- 其他属性映射 -->
+		<property name="Name" length="100" />
+		<property name="telephone" length="100" />
+		<property name="identitys" length="100" />
+		<property name="QQ" length="20" />
+		<property name="mustTuition" type="integer" length="20" />
+		<property name="actualTuition" type="integer" length="20" />
+		<property name="email" length="20" />
+		<property name="school" length="20" />
+		<property name="education" length="20" />
+		<property name="professional" length="20" />
+		<property name="identityAddress" length="20" />
+		<property name="address" length="20" />
+		<property name="remark" length="20" />
+		<property name="homeTelephone" length="20" />
+		<property name="homeContact" length="20" />
+		<property name="status" length="20" />
+		<!-- 多对一关联 -->
+		<many-to-one name="refer" column="refer_Id" lazy="false" fetch="join"/>
+		<many-to-one name="clazz" column="clazz_Id" lazy="false" fetch="join"/>
+	</class>
+	</hibernate-mapping>

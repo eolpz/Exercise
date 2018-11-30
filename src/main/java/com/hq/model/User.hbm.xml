@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hq.model">
+	<class name="User" table="crm_user">
+		<!-- oid属性映射 -->
+		<id name="uid" column="uid">
+			<!-- 主键生成策略 -->
+			<generator class="assigned" />
+		</id>
+		<!-- 其他属性映射 -->
+		<property name="username" column="username" type="string" length="30" />
+		<property name="password" type="string" length="30" />
+		
+
+	</class>
+
+</hibernate-mapping>       

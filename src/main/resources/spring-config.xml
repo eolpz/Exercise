@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<!-- 连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- JDBC连接属性 -->
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/students?useUnicode=true&amp;characterEncoding=utf8" />
+		<property name="user" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+	<!-- session factory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 依赖连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- hibernate 配置文件 -->
+		<property name="configLocations" value="classpath:hibernate.cfg.xml" />
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<!-- 注入依赖对象 -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 事务通知 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="save*" read-only="false" />
+			<tx:method name="update*" read-only="false" />
+			<tx:method name="delete*" read-only="false" />
+			<tx:method name="get*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- aop管理事务 -->
+	<aop:config>
+		<!-- 切点 -->
+		<aop:pointcut expression="execution(* com.hq.service..*(..))"
+			id="pc" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pc" />
+	</aop:config>
+
+	<!-- dao 层bean -->
+	<bean id="baseDao" class="com.hq.dao.BaseDaoSupport">
+		<!-- 注入依赖对象 -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="userDao" class="com.hq.dao.UserDaoImpl">
+		<!-- 依赖sessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 通知spring容器 依赖父类对象 -->
+	<bean id="departmentDao" class="com.hq.dao.DepartmentDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<!-- service层bean -->
+	<bean id="baseService" class="com.hq.service.BaseServiceSupport">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+	<bean id="departmentService" class="com.hq.service.impl.DepartmentServiceImpl"
+		parent="baseService">
+	</bean>
+	<bean id="postService" class="com.hq.service.impl.PostServiceImpl"
+		parent="baseService">
+	</bean>
+	<bean id="staffService" class="com.hq.service.impl.StaffServiceImpl"
+		parent="baseService">
+	</bean>
+	<bean id="courseService" class="com.hq.service.impl.CourseServiceImpl"
+		parent="baseService">
+	</bean>
+	<bean id="clazzService" class="com.hq.service.impl.ClazzServiceImpl"
+		parent="baseService">
+	</bean>
+	<bean id="referService" class="com.hq.service.impl.ReferServiceImpl"
+		parent="baseService">
+	</bean>
+	<bean id="followService" class="com.hq.service.impl.FollowServiceImpl"
+		parent="baseService">
+	</bean>
+	<bean id="studentService" class="com.hq.service.impl.StudentServiceImpl"
+		parent="baseService">
+	</bean>
+	<bean id="stationService" class="com.hq.service.impl.StationServiceImpl"
+		parent="baseService">
+	</bean>
+	<bean id="runOffService" class="com.hq.service.impl.RunOffServiceImpl"
+		parent="baseService">
+	</bean>
+	<bean id="graduateService" class="com.hq.service.impl.GraduateServiceImpl"
+		parent="baseService">
+	</bean>
+	
+	
+
+	<!-- action -->
+	
+	
+	<bean id="baseAction" class="com.hq.action.BaseAction" scope="prototype">
+		<property name="departmentService" ref="departmentService" />
+		<property name="postService" ref="postService" />
+		<property name="staffService" ref="staffService" />
+		<property name="clazzService" ref="clazzService" />
+		<property name="courseService" ref="courseService" />
+		<property name="referService" ref="referService" />
+		<property name="followService" ref="followService" />
+		<property name="studentService" ref="studentService" />
+		<property name="stationService" ref="stationService" />
+		<property name="runOffService" ref="runOffService" />
+		<property name="graduateService" ref="graduateService" />
+	</bean>
+	
+	<bean id="mainAction" class="com.hq.action.MainAction" scope="prototype" parent="baseAction"/>
+	<bean id="departmentAction" class="com.hq.action.DepartmentAction" scope="prototype" parent="baseAction">
+		<!-- <property name="departmentService" ref="departmentService" /> -->
+	</bean>
+	<bean id="postAction" class="com.hq.action.PostAction" scope="prototype"  parent="baseAction">
+		<!-- <property name="departmentService" ref="departmentService" /> -->
+	</bean>
+	<bean id="staffAction" class="com.hq.action.StaffAction" scope="prototype"  parent="baseAction">
+		<!-- <property name="departmentService" ref="departmentService" /> -->
+	</bean>
+	<bean id="clazzAction" class="com.hq.action.ClazzAction" scope="prototype"  parent="baseAction">
+		<!-- <property name="departmentService" ref="departmentService" /> -->
+	</bean>
+	<bean id="courseAction" class="com.hq.action.CourseAction" scope="prototype"  parent="baseAction">
+		<!-- <property name="departmentService" ref="departmentService" /> -->
+	</bean>
+	<bean id="referAction" class="com.hq.action.ReferAction" scope="prototype"  parent="baseAction">
+		<!-- <property name="departmentService" ref="departmentService" /> -->
+	</bean>
+	<bean id="followAction" class="com.hq.action.FollowAction" scope="prototype"  parent="baseAction">
+		<!-- <property name="departmentService" ref="departmentService" /> -->
+	</bean>
+	<bean id="studentAction" class="com.hq.action.StudentAction" scope="prototype"  parent="baseAction">
+		<!-- <property name="departmentService" ref="departmentService" /> -->
+	</bean>
+	<bean id="stationAction" class="com.hq.action.StationAction" scope="prototype"  parent="baseAction">
+		<!-- <property name="departmentService" ref="departmentService" /> -->
+	</bean>
+	<bean id="runOffAction" class="com.hq.action.RunOffAction" scope="prototype"  parent="baseAction">
+		<!-- <property name="departmentService" ref="departmentService" /> -->
+	</bean>
+	<bean id="graduateAction" class="com.hq.action.GraduateAction" scope="prototype"  parent="baseAction">
+		<!-- <property name="departmentService" ref="departmentService" /> -->
+	</bean>
+	
+	
+	<bean id="userService" class="com.hq.service.impl.UserServiceImpl">
+		<!-- 依赖dao -->
+		<property name="userDao" ref="userDao" />
+	</bean>
+	
+	<bean id="userAction" class="com.hq.action.UserAction">
+		<!-- 注入service依赖对象 -->
+		<property name="mainAction" ref="mainAction"/>
+		<property name="userService" ref="userService"/>
+	</bean>
+	
+</beans>

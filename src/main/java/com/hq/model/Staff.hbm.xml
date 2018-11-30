@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hq.model">
+	<class name="Staff" table="crm_staff">
+		<!-- oid属性映射 -->
+		<id name="staffId">
+			<!-- 主键生成策略 -->
+			<generator class="identity"/>
+		</id>
+		<!-- 其他属性映射 -->
+		<property name="loginName" length="100" />
+		<property name="loginPwd" length="100" />
+		<property name="staffName" length="100" />
+		<property name="gender" length="20" />
+		<property name="onDutyDate" type="timestamp" />
+		<!-- 多对一关联 -->
+		<many-to-one name="post" column="postId" lazy="false" fetch="join"/>
+	</class>
+
+</hibernate-mapping>      

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hq.model">
+<class name="Course" table="crm_course">
+			<id name="courseid">
+			<!-- 主键生成策略 -->
+			<generator class="identity" />
+		</id>
+		<!-- 其他属性映射 -->
+		<property name="courseCost" type="double" length="100" />
+		<property name="total" type="integer" length="100" />
+		<property name="name" type="string" length="100" />
+		<property name="remake" type="string" length="100" />
+</class>
+</hibernate-mapping>
